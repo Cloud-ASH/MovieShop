@@ -1,0 +1,43 @@
+@model ApplicationCore.Models.MovieDetailsModel
+
+<div class="modal fade" id="leaveReviewModal" tabindex="-1" aria-labelledby="reviewLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="reviewLabel">Leave a Review for @Model.Title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <form asp-action="LeaveReview" asp-controller="Movies" asp-route-id="@Model.Id" method="post">
+
+                    <!-- Rating Dropdown -->
+                    <div class="mb-3">
+                        <label class="form-label">Rating (1–10)</label>
+                        <select class="form-select" name="Rating" required>
+                            <option value="">Select Rating</option>
+                            @for (int i = 1; i <= 10; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
+
+                    <!-- Review Text Box -->
+                    <div class="mb-3">
+                        <label class="form-label">Your Review</label>
+                        <textarea name="ReviewText" class="form-control" rows="4" required></textarea>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" class="btn btn-primary w-100">Submit Review</button>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,156 @@
+@model IEnumerable<ApplicationCore.Models.UserPurchaseViewModel>
+
+@{
+    ViewData["Title"] = "My Purchases";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="mb-4">
+                <i class="bi bi-bag-check me-2"></i>User Purchase Details
+            </h2>
+
+            @if (Model != null && Model.Any())
+            {
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-3">
+                    @foreach (var purchase in Model)
+                    {
+                        <div class="col">
+                            <div class="card movie-card h-100" style="cursor: pointer;">
+                                <div class="position-relative" onclick="window.location.href='@Url.Action("Details", "Movies", new { id = purchase.MovieId })'">
+                                    @if (!string.IsNullOrEmpty(purchase.PosterUrl))
+                                    {
+                                        <img src="@purchase.PosterUrl" class="card-img-top" alt="@purchase.MovieTitle" style="height: 350px; object-fit: cover;">
+                                    }
+                                    else
+                                    {
+                                        <div class="card-img-top d-flex align-items-center justify-content-center bg-secondary text-white" style="height: 350px;">
+                                            <i class="bi bi-film" style="font-size: 4rem;"></i>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="card-body d-flex flex-column p-2">
+                                    <h6 class="card-title text-truncate mb-2" title="@purchase.MovieTitle">
+                                        @purchase.MovieTitle
+                                    </h6>
+                                    <button type="button" 
+                                            class="btn btn-sm btn-outline-info rounded-pill w-100"
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#purchaseModal"
+                                            data-purchase-date="@purchase.PurchaseDate.ToString("MMM dd, yyyy")"
+                                            data-purchase-price="@purchase.Price.ToString("C")"
+                                            data-purchase-number="@purchase.PurchaseNumber"
+                                            onclick="event.stopPropagation();">
+                                        <i class="bi bi-receipt me-1"></i>Purchase Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info" role="alert">
+                    <i class="bi bi-info-circle me-2"></i>
+                    You haven't purchased any movies yet. 
+                    <a href="@Url.Action("Index", "Home")" class="alert-link">Browse movies</a> to get started!
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Purchase Details Modal -->
+<div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="purchaseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title" id="purchaseModalLabel">
+                    <i class="bi bi-receipt-cutoff me-2"></i>Purchase Details
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3">
+                    <div class="col-4 fw-bold">
+                        <i class="bi bi-calendar-event me-2"></i>Purchase Date
+                    </div>
+                    <div class="col-8" id="modalPurchaseDate">
+                        <!-- Date will be inserted here -->
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4 fw-bold">
+                        <i class="bi bi-currency-dollar me-2"></i>Price
+                    </div>
+                    <div class="col-8" id="modalPurchasePrice">
+                        <!-- Price will be inserted here -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 fw-bold">
+                        <i class="bi bi-hash me-2"></i>Purchase Number
+                    </div>
+                    <div class="col-8">
+                        <small class="text-muted font-monospace" id="modalPurchaseNumber">
+                            <!-- Purchase Number will be inserted here -->
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle me-1"></i>Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // When modal is shown, populate it with purchase details
+        document.getElementById('purchaseModal').addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget; // Button that triggered the modal
+            
+            var purchaseDate = button.getAttribute('data-purchase-date');
+            var purchasePrice = button.getAttribute('data-purchase-price');
+            var purchaseNumber = button.getAttribute('data-purchase-number');
+            
+            document.getElementById('modalPurchaseDate').textContent = purchaseDate;
+            document.getElementById('modalPurchasePrice').textContent = purchasePrice;
+            document.getElementById('modalPurchaseNumber').textContent = purchaseNumber;
+        });
+    </script>
+}
+
+<style>
+    .movie-card {
+        transition: transform 0.2s, box-shadow 0.2s;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+    }
+
+    .movie-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .modal-body .row {
+        padding: 10px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .modal-body .row:last-child {
+        border-bottom: none;
+    }
+</style>

@@ -1,0 +1,28 @@
+@model IEnumerable<ApplicationCore.Models.MovieCardModel>
+
+@{
+    ViewData["Title"] = "My Movies";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">My Movies</h2>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row row-cols-1 row-cols-md-4 row-cols-lg-6 g-3">
+            @foreach (var movie in Model)
+            {
+                <div class="col">
+                    @await Html.PartialAsync("_MovieCard", movie)
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <p>You haven't purchased any movies yet.</p>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Browse Movies</a>
+        </div>
+    }
+</div>

@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "My Account";
+    var userName = Context.Session.GetString("UserName");
+    var userEmail = Context.Session.GetString("UserEmail");
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">My Account</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Account Information</h5>
+            <p><strong>Name:</strong> @userName</p>
+            <p><strong>Email:</strong> @userEmail</p>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-action="Movies" class="btn btn-primary me-2">My Movies</a>
+        <a asp-action="Favorites" class="btn btn-outline-danger">My Favorites</a>
+    </div>
+</div>

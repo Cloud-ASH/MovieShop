@@ -1,0 +1,67 @@
+@model ApplicationCore.Models.CastDetailsModel
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container mt-5">
+
+    <div class="row">
+        <!-- LEFT: Cast Info -->
+        <div class="col-md-4 text-center">
+
+            <img src="@Model.ProfilePath" alt="@Model.Name" class="img-fluid rounded-circle shadow-sm mb-3"
+                style="width: 200px; height: 200px; object-fit: cover;" />
+
+            <h2>@Model.Name</h2>
+
+            <p class="text-muted mb-1">
+                <strong>Gender:</strong> @Model.Gender
+            </p>
+
+            @if (!string.IsNullOrEmpty(Model.TmdbUrl))
+            {
+                <p class="mb-0">
+                    <a href="@Model.TmdbUrl" target="_blank" class="btn btn-sm btn-outline-secondary mt-2">
+                        View on TMDB
+                    </a>
+                </p>
+            }
+        </div>
+
+        <!-- RIGHT: Movies this cast appears in -->
+        <div class="col-md-8">
+
+            <h3 class="mb-3">Movies</h3>
+
+            <div class="list-group shadow-sm">
+                @if (Model.Movies != null && Model.Movies.Any())
+                {
+                    @foreach (var movie in Model.Movies)
+                    {
+                        <a asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id"
+                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+
+                            <div>
+                                <strong>@movie.Title</strong>
+                            </div>
+
+                            @if (movie.ReleaseDate != null)
+                            {
+                                <small class="text-muted">@movie.ReleaseDate.Value.ToString("yyyy")</small>
+                            }
+                        </a>
+                    }
+                }
+                else
+                {
+                    <div class="list-group-item text-muted">
+                        No movies available for this cast.
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+
+</div>

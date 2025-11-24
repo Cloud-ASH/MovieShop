@@ -1,0 +1,26 @@
+@model ApplicationCore.Models.MovieDetailsModel
+
+<div class="modal fade" id="buyMovieModal" tabindex="-1" aria-labelledby="buyMovieLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="buyMovieLabel">Confirm Purchase</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                Would you like to purchase <strong>@Model.Title</strong> for <strong>$@Model.Price</strong>?
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+                <form asp-action="BuyMovie" asp-controller="Movies" asp-route-id="@Model.Id" method="post">
+                    <button type="submit" class="btn btn-danger">Confirm Purchase</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
