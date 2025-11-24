@@ -11,6 +11,8 @@ public class MovieShopDbContext : DbContext
 
     // DbSets for all entities
     // test azure devops ci cd
+    // test azure devops cd
+
     public DbSet<Movie> Movies { get; set; }
     public DbSet<Genre> Genres { get; set; }
     public DbSet<MovieGenre> MovieGenres { get; set; }
