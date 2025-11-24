@@ -4732,13 +4732,12 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/zeyushen/Documents/antra_ii/ZeyuMVC/src/Infrastructure/Infrastructure.csproj",
+      "projectUniqueName": "/Users/zeyushen/Documents/antra_ii/MovieShop/src/Infrastructure/Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "/Users/zeyushen/Documents/antra_ii/ZeyuMVC/src/Infrastructure/Infrastructure.csproj",
+      "projectPath": "/Users/zeyushen/Documents/antra_ii/MovieShop/src/Infrastructure/Infrastructure.csproj",
       "packagesPath": "/Users/zeyushen/.nuget/packages/",
-      "outputPath": "/Users/zeyushen/Documents/antra_ii/ZeyuMVC/src/Infrastructure/obj/",
+      "outputPath": "/Users/zeyushen/Documents/antra_ii/MovieShop/src/Infrastructure/obj/",
       "projectStyle": "PackageReference",
-      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
         "/Users/zeyushen/.nuget/NuGet/NuGet.Config"
       ],
@@ -4752,8 +4751,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/Users/zeyushen/Documents/antra_ii/ZeyuMVC/src/ApplicationCore/ApplicationCore.csproj": {
-              "projectPath": "/Users/zeyushen/Documents/antra_ii/ZeyuMVC/src/ApplicationCore/ApplicationCore.csproj"
+            "/Users/zeyushen/Documents/antra_ii/MovieShop/src/ApplicationCore/ApplicationCore.csproj": {
+              "projectPath": "/Users/zeyushen/Documents/antra_ii/MovieShop/src/ApplicationCore/ApplicationCore.csproj"
             }
           }
         }
@@ -4767,7 +4766,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
